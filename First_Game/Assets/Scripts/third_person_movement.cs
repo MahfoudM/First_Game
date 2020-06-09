@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using UnityEngine;
 
-public class third_person_movement : MonoBehaviour
+public class third_person_movement : MonoBehaviourPun
 {
     public CharacterController controller;
     public float speed = 6f;
@@ -13,24 +15,25 @@ public class third_person_movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-        if(direction.magnitude>= 0.1)
+
+
+        if (photonView.IsMine)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg+cam.eulerAngles.y;
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+            Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+            if (direction.magnitude >= 0.1)
+            {
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
 
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            Vector3 Movedir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                Vector3 Movedir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-            controller.Move(Movedir.normalized * speed * Time.deltaTime);
-            
-
-
+                controller.Move(Movedir.normalized * speed * Time.deltaTime);
+            }
         }
-
     }
 }
