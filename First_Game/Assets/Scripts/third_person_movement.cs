@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class third_person_movement : MonoBehaviour
-{
+{ // Variables 
     public CharacterController controller;
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
@@ -12,10 +12,11 @@ public class third_person_movement : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {  //movement   
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+
         if(direction.magnitude>= 0.1)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg+cam.eulerAngles.y;
