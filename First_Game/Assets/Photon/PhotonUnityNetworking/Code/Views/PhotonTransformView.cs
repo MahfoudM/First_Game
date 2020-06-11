@@ -17,7 +17,7 @@ namespace Photon.Pun
     [AddComponentMenu("Photon Networking/Photon Transform View")]
     [HelpURL("https://doc.photonengine.com/en-us/pun/v2/gameplay/synchronization-and-state")]
     [RequireComponent(typeof(PhotonView))]
-    public class PhotonTransformView : MonoBehaviour, IPunObservable
+    public class PhotonTransformView : UnityEngine.MonoBehaviour, IPunObservable
     {
         private float m_Distance;
         private float m_Angle;

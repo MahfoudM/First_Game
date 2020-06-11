@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSpawner : NetworkBehaviour
+public class PlayerSpawner : Photon.Pun.MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab = null;
     [SerializeField] private CinemachineFreeLook playerCamera = null;

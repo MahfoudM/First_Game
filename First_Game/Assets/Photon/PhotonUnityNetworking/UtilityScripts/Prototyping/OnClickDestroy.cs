@@ -35,7 +35,7 @@ namespace Photon.Pun.UtilityScripts
     /// Gets OnClick() calls by Unity's IPointerClickHandler. Needs a PhysicsRaycaster on the camera.
     /// See: https://docs.unity3d.com/ScriptReference/EventSystems.IPointerClickHandler.html
     /// </remarks>
-    public class OnClickDestroy : NetworkBehaviour, IPointerClickHandler
+    public class OnClickDestroy : Pun.MonoBehaviour, IPointerClickHandler
     {
         public PointerEventData.InputButton Button;
         public KeyCode ModifierKey;

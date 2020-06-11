@@ -17,7 +17,7 @@ namespace Photon.Pun
     [RequireComponent(typeof(PhotonView))]
     [RequireComponent(typeof(Rigidbody))]
     [AddComponentMenu("Photon Networking/Photon Rigidbody View")]
-    public class PhotonRigidbodyView : MonoBehaviour, IPunObservable
+    public class PhotonRigidbodyView : UnityEngine.MonoBehaviour, IPunObservable
     {
         private float m_Distance;
         private float m_Angle;
