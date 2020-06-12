@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &807101286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 807101287}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &807101287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807101286}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.436, z: 0.034}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 258882596715686107}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &258882596567911214
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,11 +120,9 @@ GameObject:
   m_Component:
   - component: {fileID: 258882596715686107}
   - component: {fileID: 258882596715686106}
-  - component: {fileID: 258882596715686104}
   - component: {fileID: 258882596715686084}
   - component: {fileID: 258882596715686085}
-  - component: {fileID: 930923928004644760}
-  - component: {fileID: 778986316104688888}
+  - component: {fileID: 1332548062}
   m_Layer: 0
   m_Name: third person player
   m_TagString: Player
@@ -115,6 +143,7 @@ Transform:
   m_Children:
   - {fileID: 258882596567911209}
   - {fileID: 2829454104087093939}
+  - {fileID: 807101287}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -129,31 +158,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2.59
+  m_Height: 2.56
   m_Radius: 0.53
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: -0.15, z: 0.05}
---- !u!114 &258882596715686104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 258882596715686105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28bc4f38148b05d4d8e52b2a987e3814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 6
-  turnSmoothTime: 0.1
-  controller: {fileID: 258882596715686106}
-  cam: {fileID: 8361509992610969599, guid: 4a5388f5819c56d4bae9d8fb7accc617, type: 3}
-  controllerTransform: {fileID: 258882596715686107}
-  player: {fileID: 258882596715686107}
 --- !u!114 &258882596715686084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,7 +202,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
---- !u!114 &930923928004644760
+--- !u!114 &1332548062
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,29 +211,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 258882596715686105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9cf04f0d0eeaae4bbba2605e1850dab, type: 3}
+  m_Script: {fileID: 11500000, guid: f2a3c2749dace484fbecdd73001d4750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameText: {fileID: 7290259301269389379}
---- !u!1818360609 &778986316104688888
-RotationConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 258882596715686105}
-  m_Enabled: 1
-  m_Weight: 1
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_RotationOffset: {x: 0, y: 0, z: 0}
-  m_AffectRotationX: 1
-  m_AffectRotationY: 0
-  m_AffectRotationZ: 1
-  m_IsContraintActive: 1
-  m_IsLocked: 1
-  m_Sources:
-  - sourceTransform: {fileID: 258882596715686107}
-    weight: 1
+  InputX: 0
+  InputZ: 0
+  desiredMoveDirection: {x: 0, y: 0, z: 0}
+  blockRotationPlayer: 0
+  desiredRotationSpeed: 0.1
+  Speed: 5
+  allowPlayerRotation: 0
+  cam: {fileID: 0}
+  controller: {fileID: 0}
+  isGrounded: 0
+  gravity: -15
+  groundCheck: {fileID: 807101287}
+  groundCheckDistance: 0.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  JumpHeight: 0
 --- !u!1 &258882597975599879
 GameObject:
   m_ObjectHideFlags: 0
