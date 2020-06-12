@@ -25,7 +25,7 @@ namespace Photon.Pun
     /// </summary>
     [RequireComponent(typeof(PhotonView))]
     [AddComponentMenu("Photon Networking/Photon Transform View Classic")]
-    public class PhotonTransformViewClassic : UnityEngine.MonoBehaviour, IPunObservable
+    public class PhotonTransformViewClassic : MonoBehaviour, IPunObservable
     {
         //As this component is very complex, we separated it into multiple classes.
         //The PositionModel, RotationModel and ScaleMode store the data you are able to

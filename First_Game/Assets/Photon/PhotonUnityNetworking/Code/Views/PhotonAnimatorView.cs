@@ -27,7 +27,7 @@ namespace Photon.Pun
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(PhotonView))]
     [AddComponentMenu("Photon Networking/Photon Animator View")]
-    public class PhotonAnimatorView : UnityEngine.MonoBehaviour, IPunObservable
+    public class PhotonAnimatorView : MonoBehaviour, IPunObservable
     {
         #region Enums
 

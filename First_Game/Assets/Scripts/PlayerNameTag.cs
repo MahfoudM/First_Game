@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class PlayerNameTag : Photon.Pun.MonoBehaviour
+public class PlayerNameTag : NetworkBehaviour
 {
     [SerializeField] private TextMeshProUGUI nameText;
 

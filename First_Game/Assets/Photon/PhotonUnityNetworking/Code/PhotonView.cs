@@ -28,7 +28,7 @@ namespace Photon.Pun
     /// </summary>
     /// \ingroup publicApi
     [AddComponentMenu("Photon Networking/Photon View")]
-    public class PhotonView : UnityEngine.MonoBehaviour
+    public class PhotonView : MonoBehaviour
     {
         #if UNITY_EDITOR
         [ContextMenu("Open PUN Wizard")]
@@ -252,7 +252,7 @@ namespace Photon.Pun
 
         protected internal bool removedFromLocalViewList;
 
-        internal UnityEngine.MonoBehaviour[] RpcMonoBehaviours;
+        internal MonoBehaviour[] RpcMonoBehaviours;
 
 
         /// <summary>Called by Unity on start of the application and does a setup the PhotonView.</summary>
@@ -382,7 +382,7 @@ namespace Photon.Pun
         /// </remarks>
         public void RefreshRpcMonoBehaviourCache()
         {
-            this.RpcMonoBehaviours = this.GetComponents<UnityEngine.MonoBehaviour>();
+            this.RpcMonoBehaviours = this.GetComponents<MonoBehaviour>();
         }
 
 
