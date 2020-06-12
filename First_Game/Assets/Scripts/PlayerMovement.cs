@@ -10,13 +10,16 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     private CharacterController myCC;
     public float movementSpeed = 6f;
     public float rotationSpeed;
+    public float gravity = -9.81f;
 
-
+    Vector3 velocity;
 
     private void Start()
     {
         PV = GetComponent<PhotonView>();
         myCC = GetComponent<CharacterController>();
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -26,6 +29,10 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             BasicMovement();
             BasicRotation();
         }
+
+        velocity.y += gravity * Time.deltaTime;
+
+        myCC.Move(velocity * Time.deltaTime);
     }
 
     void BasicMovement()
