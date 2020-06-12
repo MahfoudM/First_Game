@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     public float movementSpeed = 6f;
     public float rotationSpeed;
 
+
+
     private void Start()
     {
         PV = GetComponent<PhotonView>();
@@ -22,7 +24,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         if (PV.IsMine)
         {
             BasicMovement();
-
+            BasicRotation();
         }
     }
 
@@ -48,5 +50,12 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             myCC.Move(transform.right * Time.deltaTime * movementSpeed);
         }
     }
+
+    void BasicRotation()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * rotationSpeed;
+        transform.Rotate(new Vector3(0, mouseX, 0));
+    }
+
 }
 
