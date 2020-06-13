@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class MovementInput : MonoBehaviourPunCallbacks
 {
-    public float InputX;
-    public float InputZ;
+    public float InputX = 5f;
+    public float InputZ = 5f;
     public Vector3 desiredMoveDirection;
     public bool blockRotationPlayer;
-    public float desiredRotationSpeed;
+    public float desiredRotationSpeed = 0.1f;
     //public Animator anim;
-    public float Speed;
+    public float Speed = 5f;
     public float allowPlayerRotation;
     public Camera cam;
     public CharacterController controller;
@@ -24,7 +24,7 @@ public class MovementInput : MonoBehaviourPunCallbacks
     public Transform groundCheck;
     public float groundCheckDistance = 0.4f;
     public LayerMask groundMask;
-    public float JumpHeight = 3f;
+    public float JumpHeight = 2f;
 
     private void Start()
     {
@@ -35,7 +35,6 @@ public class MovementInput : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundMask);
 
         if (photonView.IsMine)
         {
@@ -48,7 +47,7 @@ public class MovementInput : MonoBehaviourPunCallbacks
                 velocity.y = -2f;
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
                 velocity.y = Mathf.Sqrt(JumpHeight * -2f * gravity);
             }

@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 258882596715686084}
   - component: {fileID: 258882596715686085}
   - component: {fileID: 1332548062}
+  - component: {fileID: 8916223385989435584}
   m_Layer: 0
   m_Name: third person player
   m_TagString: Player
@@ -219,7 +220,7 @@ MonoBehaviour:
   desiredMoveDirection: {x: 0, y: 0, z: 0}
   blockRotationPlayer: 0
   desiredRotationSpeed: 0.1
-  Speed: 5
+  Speed: 1
   allowPlayerRotation: 0
   cam: {fileID: 0}
   controller: {fileID: 0}
@@ -230,7 +231,20 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
-  JumpHeight: 0
+  JumpHeight: 2
+--- !u!114 &8916223385989435584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258882596715686105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9cf04f0d0eeaae4bbba2605e1850dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: {fileID: 7290259301269389379}
 --- !u!1 &258882597975599879
 GameObject:
   m_ObjectHideFlags: 0
