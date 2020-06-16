@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class MovementInput : MonoBehaviourPunCallbacks
 {
-    public float InputX = 5f;
-    public float InputZ = 5f;
+    public float InputX;
+    public float InputZ;
     public Vector3 desiredMoveDirection;
     public bool blockRotationPlayer;
     public float desiredRotationSpeed = 0.1f;
-    //public Animator anim;
-    public float Speed = 5f;
+    public Animator anim;
+    public float Speed;
     public float allowPlayerRotation;
     public Camera cam;
     public CharacterController controller;
@@ -28,7 +28,7 @@ public class MovementInput : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        //anim = this.GetComponent<Animator>();
+        anim = this.GetComponent<Animator>();
         cam = Camera.main;
         controller = this.GetComponent<CharacterController>();
     }
@@ -86,19 +86,19 @@ public class MovementInput : MonoBehaviourPunCallbacks
         InputX = Input.GetAxis("Horizontal");
         InputZ = Input.GetAxis("Vertical");
 
-        //anim.SetFloat("InputZ", InputZ, 0.0f, Time.deltaTime * 2f);
-        //anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2f);
+        anim.SetFloat("InputZ", InputZ, 0.0f, Time.deltaTime * 2f);
+        anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2f);
 
         Speed = new Vector2(InputX, InputZ).sqrMagnitude;
 
         if(Speed > allowPlayerRotation)
         {
-          //  anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
+            anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
             PlayerMoveAndRotation();
         }
         else if (Speed < allowPlayerRotation)
         {
-          //  anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
+            anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
         }
     }
 }
