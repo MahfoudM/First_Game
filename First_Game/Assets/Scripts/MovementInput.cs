@@ -25,6 +25,7 @@ public class MovementInput : MonoBehaviourPunCallbacks
     public float groundCheckDistance = 0.4f;
     public LayerMask groundMask;
     public float JumpHeight = 2f;
+    public float MoveSpeed = 2f;
 
     private void Start()
     {
@@ -35,7 +36,6 @@ public class MovementInput : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-
         if (photonView.IsMine)
         {
             InputMagnitude();
@@ -56,6 +56,8 @@ public class MovementInput : MonoBehaviourPunCallbacks
             velocity.y += gravity * Time.deltaTime;
 
             controller.Move(velocity * Time.deltaTime);
+
+            transform.Translate(Vector3.forward * Speed * MoveSpeed);
         }
     }
 
@@ -92,10 +94,11 @@ public class MovementInput : MonoBehaviourPunCallbacks
             anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2f);
 
             //Calculate the Input Magnitude
-            Speed = new Vector2(InputX, InputZ).sqrMagnitude;
+            Speed = new Vector2(InputX, InputZ).normalized.sqrMagnitude;
 
-            //Physically move player
-            if (Speed > allowPlayerRotation)
+
+        //Physically move player
+        if (Speed > allowPlayerRotation)
             {
             anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
             PlayerMoveAndRotation();
