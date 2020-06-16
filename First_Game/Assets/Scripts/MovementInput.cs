@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class MovementInput : MonoBehaviourPunCallbacks
 {
-    public float InputX = 5f;
-    public float InputZ = 5f;
+    public float InputX;
+    public float InputZ;
     public Vector3 desiredMoveDirection;
     public bool blockRotationPlayer;
     public float desiredRotationSpeed = 0.1f;
-    //public Animator anim;
-    public float Speed = 5f;
+    public Animator anim;
+    public float Speed;
     public float allowPlayerRotation;
     public Camera cam;
     public CharacterController controller;
@@ -28,7 +28,7 @@ public class MovementInput : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        //anim = this.GetComponent<Animator>();
+        anim = this.GetComponent<Animator>();
         cam = Camera.main;
         controller = this.GetComponent<CharacterController>();
     }
@@ -38,9 +38,10 @@ public class MovementInput : MonoBehaviourPunCallbacks
 
         if (photonView.IsMine)
         {
+            InputMagnitude();
+
             isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundMask);
 
-            InputMagnitude();
 
             if (isGrounded && velocity.y < 0)
             {
@@ -75,30 +76,33 @@ public class MovementInput : MonoBehaviourPunCallbacks
 
         desiredMoveDirection = forward * InputZ + right * InputX;
 
-        if(blockRotationPlayer == false)
+        if (blockRotationPlayer == false)
         {
-            transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
         }
     }
 
-    void InputMagnitude()
-    {
-        InputX = Input.GetAxis("Horizontal");
-        InputZ = Input.GetAxis("Vertical");
-
-        //anim.SetFloat("InputZ", InputZ, 0.0f, Time.deltaTime * 2f);
-        //anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2f);
-
-        Speed = new Vector2(InputX, InputZ).sqrMagnitude;
-
-        if(Speed > allowPlayerRotation)
+        void InputMagnitude()
         {
-          //  anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
+            //Calculate Input Vectors
+            InputX = Input.GetAxis("Horizontal");
+            InputZ = Input.GetAxis("Vertical");
+
+            anim.SetFloat("InputZ", InputZ, 0.0f, Time.deltaTime * 2f);
+            anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2f);
+
+            //Calculate the Input Magnitude
+            Speed = new Vector2(InputX, InputZ).sqrMagnitude;
+
+            //Physically move player
+            if (Speed > allowPlayerRotation)
+            {
+            anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
             PlayerMoveAndRotation();
+            }
+            else if (Speed < allowPlayerRotation)
+            {
+            anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
+            }
         }
-        else if (Speed < allowPlayerRotation)
-        {
-          //  anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
-        }
-    }
 }
