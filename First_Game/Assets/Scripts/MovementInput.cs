@@ -56,6 +56,8 @@ public class MovementInput : MonoBehaviourPunCallbacks
             velocity.y += gravity * Time.deltaTime;
 
             controller.Move(velocity * Time.deltaTime);
+
+            transform.Translate(Vector3.forward * Speed * Time.deltaTime);
         }
     }
 
@@ -92,7 +94,7 @@ public class MovementInput : MonoBehaviourPunCallbacks
             anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2f);
 
             //Calculate the Input Magnitude
-            Speed = new Vector2(InputX, InputZ).sqrMagnitude;
+            Speed = new Vector2(InputX, InputZ).normalized.sqrMagnitude;
 
             //Physically move player
             if (Speed > allowPlayerRotation)
