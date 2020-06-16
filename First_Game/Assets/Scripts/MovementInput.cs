@@ -38,9 +38,10 @@ public class MovementInput : MonoBehaviourPunCallbacks
 
         if (photonView.IsMine)
         {
+            InputMagnitude();
+
             isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundMask);
 
-            InputMagnitude();
 
             if (isGrounded && velocity.y < 0)
             {
@@ -75,30 +76,33 @@ public class MovementInput : MonoBehaviourPunCallbacks
 
         desiredMoveDirection = forward * InputZ + right * InputX;
 
-        if(blockRotationPlayer == false)
+        if (blockRotationPlayer == false)
         {
-            transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
         }
     }
 
-    void InputMagnitude()
-    {
-        InputX = Input.GetAxis("Horizontal");
-        InputZ = Input.GetAxis("Vertical");
-
-        anim.SetFloat("InputZ", InputZ, 0.0f, Time.deltaTime * 2f);
-        anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2f);
-
-        Speed = new Vector2(InputX, InputZ).sqrMagnitude;
-
-        if(Speed > allowPlayerRotation)
+        void InputMagnitude()
         {
+            //Calculate Input Vectors
+            InputX = Input.GetAxis("Horizontal");
+            InputZ = Input.GetAxis("Vertical");
+
+            anim.SetFloat("InputZ", InputZ, 0.0f, Time.deltaTime * 2f);
+            anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2f);
+
+            //Calculate the Input Magnitude
+            Speed = new Vector2(InputX, InputZ).sqrMagnitude;
+
+            //Physically move player
+            if (Speed > allowPlayerRotation)
+            {
             anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
             PlayerMoveAndRotation();
-        }
-        else if (Speed < allowPlayerRotation)
-        {
+            }
+            else if (Speed < allowPlayerRotation)
+            {
             anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
+            }
         }
-    }
 }
