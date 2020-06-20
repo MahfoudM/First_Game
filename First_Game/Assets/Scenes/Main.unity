@@ -676,16 +676,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6532770408535545765, guid: 71bb57cb4c6640846a00bd8931ac5c9b,
-        type: 3}
-      propertyPath: m_CollideAgainst.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 6532770408535545765, guid: 71bb57cb4c6640846a00bd8931ac5c9b,
-        type: 3}
-      propertyPath: m_Strategy
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6532770408535545766, guid: 71bb57cb4c6640846a00bd8931ac5c9b,
         type: 3}
       propertyPath: m_LocalPosition.x

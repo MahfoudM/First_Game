@@ -25,13 +25,15 @@ public class MovementInput : MonoBehaviourPunCallbacks
     public float groundCheckDistance = 0.4f;
     public LayerMask groundMask;
     public float JumpHeight = 2f;
-    public float MoveSpeed = 2f;
+    public float MoveSpeed = 0f;
+    private bool Run;
 
     private void Start()
     {
-        anim = this.GetComponent<Animator>();
         cam = Camera.main;
         controller = this.GetComponent<CharacterController>();
+        anim = this.GetComponent<Animator>();
+        Run = false;
     }
 
     private void Update()
@@ -40,8 +42,10 @@ public class MovementInput : MonoBehaviourPunCallbacks
         {
             InputMagnitude();
 
-            isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundMask);
+            checkShift();
+            checkSpeed();
 
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundMask);
 
             if (isGrounded && velocity.y < 0)
             {
@@ -57,7 +61,9 @@ public class MovementInput : MonoBehaviourPunCallbacks
 
             controller.Move(velocity * Time.deltaTime);
 
-            transform.Translate(Vector3.forward * Speed * MoveSpeed);
+            anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
+
+            transform.Translate(Vector3.forward * MoveSpeed * Time.deltaTime);
         }
     }
 
@@ -84,28 +90,57 @@ public class MovementInput : MonoBehaviourPunCallbacks
         }
     }
 
-        void InputMagnitude()
-        {
-            //Calculate Input Vectors
-            InputX = Input.GetAxis("Horizontal");
-            InputZ = Input.GetAxis("Vertical");
+    void InputMagnitude()
+    {
+        //Calculate Input Vectors
+        InputX = Input.GetAxis("Horizontal");
+        InputZ = Input.GetAxis("Vertical");
 
-            anim.SetFloat("InputZ", InputZ, 0.0f, Time.deltaTime * 2f);
-            anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2f);
+        anim.SetFloat("InputZ", InputZ, 0.0f, Time.deltaTime * 2f);
+        anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2f);
 
-            //Calculate the Input Magnitude
-            Speed = new Vector2(InputX, InputZ).normalized.sqrMagnitude;
+        //Calculate the Input Magnitude
+        Speed = new Vector2(InputX, InputZ).normalized.sqrMagnitude;
 
 
         //Physically move player
         if (Speed > allowPlayerRotation)
-            {
+        {
             anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
             PlayerMoveAndRotation();
-            }
-            else if (Speed < allowPlayerRotation)
-            {
-            anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
-            }
         }
+        else if (Speed < allowPlayerRotation)
+        {
+            anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
+        }
+    }
+
+    void checkSpeed()
+    {
+        if (Speed <= 1 && Speed >= 0.5 && !Run)
+        {
+            MoveSpeed = 2f;
+        }
+        else if (Speed >= 0 && Speed <= 0.2)
+        {
+            MoveSpeed = 0f;
+        }
+        else if (Speed <= 1 && Speed >= 0.5 && Run)
+        {
+            MoveSpeed = 4f;
+        }
+    }
+
+    void checkShift()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Run = true;
+        }
+        else
+        {
+            Run = false;
+        }
+        anim.SetBool("Run", Run);
+    }
 }
