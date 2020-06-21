@@ -2231,7 +2231,7 @@ MonoBehaviour:
   isGrounded: 0
   gravity: -9
   groundCheck: {fileID: 1176347897}
-  groundCheckDistance: 0.4
+  groundCheckDistance: 0.2
   groundMask:
     serializedVersion: 2
     m_Bits: 512
@@ -2277,6 +2277,12 @@ MonoBehaviour:
   - Type: 1
     SynchronizeType: 2
     Name: InputMagnitude
+  - Type: 4
+    SynchronizeType: 0
+    Name: Run
+  - Type: 4
+    SynchronizeType: 0
+    Name: Jump
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0

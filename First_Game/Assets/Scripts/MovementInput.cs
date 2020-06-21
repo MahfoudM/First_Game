@@ -27,6 +27,7 @@ public class MovementInput : MonoBehaviourPunCallbacks
     public float JumpHeight = 2f;
     public float MoveSpeed = 0f;
     private bool Run;
+    private bool Jump;
 
     private void Start()
     {
@@ -44,6 +45,7 @@ public class MovementInput : MonoBehaviourPunCallbacks
 
             checkShift();
             checkSpeed();
+            checkJump();
 
             isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundMask);
 
@@ -52,7 +54,7 @@ public class MovementInput : MonoBehaviourPunCallbacks
                 velocity.y = -2f;
             }
 
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            if (Jump && isGrounded)
             {
                 velocity.y = Mathf.Sqrt(JumpHeight * -2f * gravity);
             }
@@ -142,5 +144,18 @@ public class MovementInput : MonoBehaviourPunCallbacks
             Run = false;
         }
         anim.SetBool("Run", Run);
+    }
+
+    void checkJump()
+    {
+        if(Input.GetKeyDown("Jump"))
+        {
+            Jump = true;
+        }
+        else
+        {
+            Jump = false;
+        }
+        anim.SetBool("Jump", Jump);
     }
 }
