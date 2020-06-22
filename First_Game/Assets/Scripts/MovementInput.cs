@@ -148,11 +148,11 @@ public class MovementInput : MonoBehaviourPunCallbacks
 
     void checkJump()
     {
-        if(Input.GetKeyDown("Jump"))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             Jump = true;
         }
-        else
+        if(isGrounded && Input.GetKey(KeyCode.Space) == false)
         {
             Jump = false;
         }
