@@ -158,14 +158,15 @@ public class MovementInput : MonoBehaviourPunCallbacks
            Jump = true;
         }
 <<<<<<< HEAD
-<<<<<<< HEAD
+
+
 
         yield return new WaitForSeconds(1);
 
         if (isGrounded && Input.GetKey(KeyCode.Space) == false)
-=======
+
         else
->>>>>>> parent of fd64fb1... fixed movement
+
 =======
         else
 >>>>>>> parent of fd64fb1... fixed movement

@@ -76,7 +76,11 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_ExitTime: 0.6875
+=======
+  m_ExitTime: 0.8716852
+>>>>>>> parent of fd64fb1... fixed movement
 =======
   m_ExitTime: 0.8716852
 >>>>>>> parent of fd64fb1... fixed movement
@@ -287,8 +291,12 @@ AnimatorState:
   - {fileID: 5971431409302070497}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: -2663017107912158035}
   - {fileID: -4454106924593252896}
+=======
+  - {fileID: 290453901852801560}
+>>>>>>> parent of fd64fb1... fixed movement
 =======
   - {fileID: 290453901852801560}
 >>>>>>> parent of fd64fb1... fixed movement
