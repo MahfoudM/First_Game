@@ -35,6 +35,7 @@ public class MovementInput : MonoBehaviourPunCallbacks
         controller = this.GetComponent<CharacterController>();
         anim = this.GetComponent<Animator>();
         Run = false;
+        StartCoroutine(checkJump());
     }
 
     private void Update()
@@ -57,6 +58,10 @@ public class MovementInput : MonoBehaviourPunCallbacks
             if (Jump && isGrounded)
             {
                 velocity.y = Mathf.Sqrt(JumpHeight * -2f * gravity);
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    anim.Play("Jump");
+                }
             }
 
             velocity.y += gravity * Time.deltaTime;
@@ -146,16 +151,20 @@ public class MovementInput : MonoBehaviourPunCallbacks
         anim.SetBool("Run", Run);
     }
 
-    void checkJump()
+    IEnumerator checkJump()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Jump = true;
+           Jump = true;
         }
-        if(isGrounded && Input.GetKey(KeyCode.Space) == false)
+
+        yield return new WaitForSeconds(1);
+
+        if (isGrounded && Input.GetKey(KeyCode.Space) == false)
         {
-            Jump = false;
+             Jump = false;
         }
-        anim.SetBool("Jump", Jump);
+         anim.SetBool("Jump", Jump);
+
     }
 }
