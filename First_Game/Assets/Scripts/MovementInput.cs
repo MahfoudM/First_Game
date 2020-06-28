@@ -35,7 +35,6 @@ public class MovementInput : MonoBehaviourPunCallbacks
         controller = this.GetComponent<CharacterController>();
         anim = this.GetComponent<Animator>();
         Run = false;
-        StartCoroutine(checkJump());
     }
 
     private void Update()
@@ -151,27 +150,15 @@ public class MovementInput : MonoBehaviourPunCallbacks
         anim.SetBool("Run", Run);
     }
 
-    IEnumerator checkJump()
+    void checkJump()
     {
-        if(Input.GetKeyDown("Jump"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-           Jump = true;
+            Jump = true;
         }
-
-
-
-        yield return new WaitForSeconds(1);
-
-        if (isGrounded && Input.GetKey(KeyCode.Space) == false)
-
-        
-
-        
-        
+        else if (isGrounded && Input.GetKey(KeyCode.Space) == false)
         {
-             Jump = false;
+            Jump = false;
         }
-         anim.SetBool("Jump", Jump);
-
     }
 }
