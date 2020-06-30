@@ -28,6 +28,9 @@ public class MovementInput : MonoBehaviour
     private bool Run;
     private bool Jump;
 
+    public int secs2Wait = 2;
+    public int[] totalSec = new int[3];
+
     private void Start()
     {
         cam = Camera.main;
@@ -42,10 +45,10 @@ public class MovementInput : MonoBehaviour
 
             checkShift();
             checkSpeed();
-            checkJump();
+            //checkJump();
 
             isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundMask);
-
+        /*
             if (isGrounded && velocity.y < 0)
             {
                 velocity.y = -2f;
@@ -59,7 +62,7 @@ public class MovementInput : MonoBehaviour
                     anim.Play("Jump");
                 }
             }
-
+         */
             velocity.y += gravity * Time.deltaTime;
 
             controller.Move(velocity * Time.deltaTime);
@@ -67,6 +70,14 @@ public class MovementInput : MonoBehaviour
             anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
 
             transform.Translate(Vector3.forward * MoveSpeed * Time.deltaTime);
+    }
+
+    void TimerInvoke()
+    {
+        if (totalSec[0] < secs2Wait)
+            totalSec[0]++;
+        else
+            CancelInvoke("TimerInvoke");
     }
 
     void PlayerMoveAndRotation()
@@ -145,16 +156,14 @@ public class MovementInput : MonoBehaviour
         }
         anim.SetBool("Run", Run);
     }
-
+    /*
     void checkJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             Jump = true;
-        }
-        else if (isGrounded && Input.GetKey(KeyCode.Space) == false)
-        {
-            Jump = false;
+            anim.SetTrigger("Jump");
         }
     }
+    */
 }
