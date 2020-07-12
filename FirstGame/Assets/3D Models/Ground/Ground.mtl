@@ -1,0 +1,23 @@
+# Blender MTL File: 'Ground.blend'
+# Material Count: 2
+
+newmtl Material.002
+Ns 35.999996
+Ka 1.000000 1.000000 1.000000
+Kd 0.249930 0.249930 0.249930
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.003
+Ns 20.249994
+Ka 1.000000 1.000000 1.000000
+Kd 0.003125 0.003125 0.003125
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:\\Desktop Shortcuts\\GitHub\\First_Game\\Blends\\Material.001 Base Color.png

@@ -8,6 +8,7 @@ public class MovementInput : MonoBehaviour
     public float InputX;
     public float InputZ;
     public Vector3 desiredMoveDirection;
+    public bool DisableMovement;
     public bool blockRotationPlayer;
     public float desiredRotationSpeed = 0.1f;
     public Animator anim;
@@ -16,8 +17,6 @@ public class MovementInput : MonoBehaviour
     public Camera cam;
     public CharacterController controller;
     public bool isGrounded;
-    private float verticalVel;
-    private Vector3 moveVector;
     public float gravity = -9;
     Vector3 velocity;
     public Transform groundCheck;
@@ -31,6 +30,12 @@ public class MovementInput : MonoBehaviour
     public int secs2Wait = 2;
     public int[] totalSec = new int[3];
 
+    [SerializeField]
+    private Transform MinimapIcon;
+
+    [SerializeField]
+    private Transform PlayerMapIcon;
+
     private void Start()
     {
         cam = Camera.main;
@@ -41,13 +46,13 @@ public class MovementInput : MonoBehaviour
 
     private void Update()
     {
-            InputMagnitude();
+        InputMagnitude();
 
-            checkShift();
-            checkSpeed();
-            //checkJump();
+        checkShift();
+        checkSpeed();
+        //checkJump();
 
-            isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundMask);
         /*
             if (isGrounded && velocity.y < 0)
             {
@@ -63,13 +68,19 @@ public class MovementInput : MonoBehaviour
                 }
             }
          */
-            velocity.y += gravity * Time.deltaTime;
+        velocity.y += gravity * Time.deltaTime;
 
-            controller.Move(velocity * Time.deltaTime);
+        controller.Move(velocity * Time.deltaTime);
 
+        if (!DisableMovement)
+        {
             anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
-
             transform.Translate(Vector3.forward * MoveSpeed * Time.deltaTime);
+        }
+        else
+        {
+            anim.SetFloat("InputMagnitude", 0, 0.0f, Time.deltaTime);
+        }
     }
 
     void TimerInvoke()
@@ -166,4 +177,14 @@ public class MovementInput : MonoBehaviour
         }
     }
     */
+
+    void MinimapIconRotation()
+    {
+        MinimapIcon.eulerAngles = desiredMoveDirection;
+    }
+
+    void PlayIndicatorMovement()
+    {
+        PlayerMapIcon.eulerAngles = desiredMoveDirection;
+    }
 }
