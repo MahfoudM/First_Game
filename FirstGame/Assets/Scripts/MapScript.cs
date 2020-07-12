@@ -14,6 +14,12 @@ public class MapScript : MonoBehaviour
     public GameObject CinemachineCamera;
     public MovementInput MovementScript;
 
+    private void Start()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     private void Update()
     {
        // updatePlayerPosition();
@@ -40,6 +46,8 @@ public class MapScript : MonoBehaviour
         CinemachineCamera.SetActive(false);
         MovementScript.DisableMovement = true;
         MovementScript.blockRotationPlayer = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void closeMap()
@@ -51,11 +59,7 @@ public class MapScript : MonoBehaviour
         CinemachineCamera.SetActive(true);
         MovementScript.DisableMovement = false;
         MovementScript.blockRotationPlayer = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
-    /*
-        void updatePlayerPosition()
-        {
-            PlayerIndicator.transform.position = Player.transform.position; // + some tuning
-        }
-     */
 }
