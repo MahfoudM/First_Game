@@ -42,6 +42,7 @@ public class MovementInput : MonoBehaviour
         controller = this.GetComponent<CharacterController>();
         anim = this.GetComponent<Animator>();
         Run = false;
+        print(SystemInfo.graphicsDeviceName);
     }
 
     private void Update()
